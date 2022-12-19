@@ -18,6 +18,8 @@ x11 hashing algorithm sequentially uses:
 • ECHO
 ```
 
+C-sources taken from [DashSync](https://github.com/dashpay/dashsync-iOS/tree/master/DashSync/shared/crypto/x11)
+
 ## Usage
 
 Install the library as a Cargo crate.
