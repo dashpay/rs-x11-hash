@@ -1,8 +1,11 @@
 [package]
 name = "rs-x11-hash"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 build = "build.rs"
+license = "MIT"
+description = "Rust bindings for x11 hashing algorithm"
+repository = "https://github.com/pankcuf/rs-x11-hash"
 
 [dependencies]
 libc = "0.2.137"
