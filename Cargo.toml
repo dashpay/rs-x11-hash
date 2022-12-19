@@ -1,0 +1,25 @@
+[package]
+name = "rs-x11-hash"
+version = "0.1.1"
+edition = "2021"
+build = "build.rs"
+
+[dependencies]
+libc = "0.2.137"
+
+[dev-dependencies]
+hex = "0.4.3"
+
+[build-dependencies]
+cc = "1.0.77"
+bindgen = "0.63.0"
+
+[lib]
+name = "rs_x11_hash"
+#crate-type = ["staticlib", "cdylib"]
+crate-type = ["rlib"]
+
+[profile.release]
+lto = "thin"
+opt-level = 3
+
