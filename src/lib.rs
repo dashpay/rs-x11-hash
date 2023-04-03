@@ -12,7 +12,6 @@ extern "C" {
 }
 
 pub fn get_x11_hash<T: AsRef<[u8]>>(input: T) -> Vec<u8> {
-    assert_eq!(input.as_ref().len(), 80);
     unsafe {
         let input_str = std::ffi::CStr::from_bytes_with_nul_unchecked(input.as_ref());
         let buffer = [0u8; 32].to_vec();
