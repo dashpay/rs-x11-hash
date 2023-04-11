@@ -31,7 +31,7 @@ or use as a dependency in Cargo.toml
 
 ```
 [dependencies]
-rs-x11-hash = "0.1.2"
+rs-x11-hash = "0.1.4"
 ```
 
 Reference the library
@@ -43,5 +43,5 @@ let x11_vec = Vec::from_hex(x11).unwrap();
 let md = rs_x11_hash::get_x11_hash(x11_vec);
 println!("input: {}", x11);
 println!("output: {:?}", md.encode_hex::<String>());
-assert_eq!(md, Vec::from_hex("f29c0f286fd8071669286c6987eb941181134ff5f3978bf89f34070000000000").unwrap())
+assert_eq!(md.to_vec(), Vec::from_hex("f29c0f286fd8071669286c6987eb941181134ff5f3978bf89f34070000000000").unwrap())
 ```
