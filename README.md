@@ -31,7 +31,7 @@ or use as a dependency in Cargo.toml
 
 ```
 [dependencies]
-rs-x11-hash = "0.1.4"
+rs-x11-hash = "0.1.5"
 ```
 
 Reference the library
