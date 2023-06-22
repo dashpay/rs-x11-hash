@@ -23,9 +23,18 @@ fn main() {
         .expect("Error bindings generation")
         .write_to_file(PathBuf::from(env::var("OUT_DIR").unwrap()).join("src.rs"))
         .expect("Couldn't write bindings!");
-    cc::Build::new()
-        .file("src/x11_hash.c")
-        .include("src")
-        .flag("-Wno-unused-but-set-variable")
-        .compile("src");
+
+    let mut cc = cc::Build::new();
+    cc.file("src/x11_hash.c");
+    cc.compiler("clang");
+    cc.include("src");
+    cc.flag("-Wno-unused-but-set-variable");
+    // Fix homebrew LLVM installation issue
+    if env::consts::OS == "macos" && env::var("CARGO_CFG_TARGET_ARCH").unwrap() == "wasm32" {
+        cc.archiver("llvm-ar");
+    }
+    if !cfg!(debug_assertions) {
+        cc.opt_level(2);
+    }
+    cc.compile("src");
 }
