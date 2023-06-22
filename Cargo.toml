@@ -1,6 +1,6 @@
 [package]
 name = "rs-x11-hash"
-version = "0.1.5"
+version = "0.1.6"
 edition = "2021"
 build = "build.rs"
 license = "MIT"
@@ -19,8 +19,7 @@ bindgen = ">= 0.57.0, <= 0.65.1"
 
 [lib]
 name = "rs_x11_hash"
-#crate-type = ["staticlib", "cdylib"]
-crate-type = ["rlib"]
+crate-type = ["rlib", "cdylib"]
 
 [profile.release]
 lto = "thin"
