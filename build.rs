@@ -29,10 +29,17 @@ fn main() {
     cc.compiler("clang");
     cc.include("src");
     cc.flag("-Wno-unused-but-set-variable");
-    // Fix homebrew LLVM installation issue
-    if env::consts::OS == "macos" && env::var("CARGO_CFG_TARGET_ARCH").unwrap() == "wasm32" {
-        cc.archiver("llvm-ar");
+
+    // // Fix homebrew LLVM installation issue
+    // if env::consts::OS == "macos" && env::var("CARGO_CFG_TARGET_ARCH").unwrap() == "wasm32" {
+    //     cc.archiver("llvm-ar");
+    // }
+    // WASM headers and size/align defines.
+    if env::var("CARGO_CFG_TARGET_ARCH").unwrap() == "wasm32" {
+        cc.include("wasm/wasm-sysroot")
+            .file("wasm/wasm.c");
     }
+
     if !cfg!(debug_assertions) {
         cc.opt_level(2);
     }
