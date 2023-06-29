@@ -31,15 +31,10 @@ fn main() {
     cc.flag("-Wno-unused-but-set-variable");
     cc.flag_if_supported("-std=c++14");
 
-
-    // // Fix homebrew LLVM installation issue
-    // if env::consts::OS == "macos" && env::var("CARGO_CFG_TARGET_ARCH").unwrap() == "wasm32" {
-    //     cc.archiver("llvm-ar");
-    // }
-    // WASM headers and size/align defines.
     if env::var("CARGO_CFG_TARGET_ARCH").unwrap() == "wasm32" {
-        cc.include("wasm/wasm-sysroot")
-            .file("wasm/wasm.c");
+        cc.compiler("emcc");
+    } else {
+        cc.compiler("clang");
     }
 
     if !cfg!(debug_assertions) {

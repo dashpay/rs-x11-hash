@@ -57,12 +57,54 @@ jobs:
   WASM:
     name: WASM
     runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout Crate
+#        uses: actions/checkout@v3
+#      - name: Checkout Toolchain
+#        uses: dtolnay/rust-toolchain@stable
+#      - name: Install clang
+#        run: sudo apt install llvm-dev libclang-dev -y clang
+#      - name: Running WASM
+#        run: clang --version && CARGO_TARGET_DIR=wasm cargo install --force wasm-pack && CC=clang wasm-pack build
+#    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Crate
-        uses: actions/checkout@v3
-      - name: Checkout Toolchain
-        uses: dtolnay/rust-toolchain@stable
-      - name: Install clang
-        run: sudo apt-get install -y clang
-      - name: Running WASM
-        run: clang --version && CARGO_TARGET_DIR=wasm cargo install --force wasm-pack && CC=clang wasm-pack build
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install emsdk
+        run: |
+          git clone https://github.com/emscripten-core/emsdk.git
+          cd emsdk
+          ./emsdk install latest
+          ./emsdk activate latest
+          source ./emsdk_env.sh
+
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: wasm32-unknown-unknown
+          override: true
+
+      - name: Check
+        uses: actions-rs/cargo@v1
+        with:
+          command: check
+          args: --target wasm32-unknown-unknown
+
+      - name: Build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --target wasm32-unknown-unknown
+
+      - name: Test
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: --target wasm32-unknown-unknown
