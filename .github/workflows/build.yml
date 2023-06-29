@@ -45,6 +45,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Checkout Toolchain
         uses: dtolnay/rust-toolchain@stable
+      - name: Install i686 gcc
+        run: sudo apt-get update -y && sudo apt-get install libclang-3.9-dev
       - name: Install target
         run: rustup target add s390x-unknown-linux-gnu
       - name: install cross
