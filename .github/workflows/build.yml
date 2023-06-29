@@ -82,6 +82,7 @@ jobs:
           cd emsdk
           ./emsdk install latest
           ./emsdk activate latest
+          echo "LIBCLANG_PATH=$PWD/upstream/libclang" >> $GITHUB_ENV
           source ./emsdk_env.sh
 
       - name: Set up Rust
