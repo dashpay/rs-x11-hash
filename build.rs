@@ -29,6 +29,8 @@ fn main() {
     cc.compiler("clang");
     cc.include("src");
     cc.flag("-Wno-unused-but-set-variable");
+    cc.flag_if_supported("-std=c++14");
+
 
     // // Fix homebrew LLVM installation issue
     // if env::consts::OS == "macos" && env::var("CARGO_CFG_TARGET_ARCH").unwrap() == "wasm32" {
