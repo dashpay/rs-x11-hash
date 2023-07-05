@@ -32,11 +32,7 @@ fn main() {
     if env::var("CARGO_CFG_TARGET_ARCH").unwrap() == "wasm32" {
         // Include fake wasm-sysroot headers to pass compilation
         cc.include("wasm-sysroot");
-
-        // Fix homebrew LLVM installation issue
-        if env::consts::OS == "macos" {
-            cc.archiver("llvm-ar");
-        }
+        cc.archiver("llvm-ar");
     }
     if !cfg!(debug_assertions) {
         cc.opt_level(2);
