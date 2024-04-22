@@ -33,6 +33,12 @@ fn main() {
         // Include fake wasm-sysroot headers to pass compilation
         cc.include("wasm-sysroot");
         cc.archiver("llvm-ar");
+    } else if env::var("CARGO_CFG_TARGET_OS").unwrap() =="android" {
+        // this assumes that cargo-ndk is used initiate the build
+        let sysroot_path = env::var("CARGO_NDK_SYSROOT_PATH").expect("CARGO_NDK_SYSROOT_PATH is not set");
+        // Construct the `CFLAGS` with `--sysroot` pointing to the NDK's sysroot path.
+        let cflags = format!("--sysroot={}", sysroot_path);
+        cc.flag(&cflags);
     }
     if !cfg!(debug_assertions) {
         cc.opt_level(2);
