@@ -49,7 +49,6 @@
 
 #include <limits.h>
 #include <string.h>
-#include <unistd.h>
 
 /*
  * All our I/O functions are defined over octet streams. We do not know
