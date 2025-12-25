@@ -15,7 +15,6 @@ hex = "0.4.3"
 
 [build-dependencies]
 cc = "1.0.77"
-bindgen = ">= 0.57.0, <= 0.65.1"
 
 [lib]
 name = "rs_x11_hash"
