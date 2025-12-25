@@ -1,20 +1,17 @@
 [package]
 name = "rs-x11-hash"
-version = "0.1.8"
+version = "0.1.9"
 edition = "2021"
 build = "build.rs"
 license = "MIT"
 description = "Rust bindings for x11 hashing algorithm"
-repository = "https://github.com/pankcuf/rs-x11-hash"
-
-[dependencies]
-libc = "0.2.137"
+repository = "https://github.com/dashpay/rs-x11-hash"
 
 [dev-dependencies]
-hex = "0.4.3"
+hex = "0.4"
 
 [build-dependencies]
-cc = "1.0.77"
+cc = "1.2"
 
 [lib]
 name = "rs_x11_hash"
