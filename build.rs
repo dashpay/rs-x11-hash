@@ -26,10 +26,10 @@ fn main() {
 
     let mut cc = cc::Build::new();
     cc.file("src/x11_hash.c");
-    cc.compiler("clang");
     cc.include("src");
-    cc.flag("-Wno-unused-but-set-variable");
+    // Only set clang for wasm, otherwise let cc auto-detect
     if env::var("CARGO_CFG_TARGET_ARCH").unwrap() == "wasm32" {
+        cc.compiler("clang");
         // Include fake wasm-sysroot headers to pass compilation
         cc.include("wasm-sysroot");
         cc.archiver("llvm-ar");
