@@ -51,3 +51,19 @@ jobs:
       - run: cargo build --verbose
       - run: cargo build --release --verbose
       - run: cargo test --verbose
+
+  android:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target: [aarch64-linux-android, armv7-linux-androideabi]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-ndk
+      - name: Build for Android
+        run: cargo ndk -t ${{ matrix.target }} build
